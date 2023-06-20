@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2660249779407589309}
   - component: {fileID: 2533969108447409598}
   - component: {fileID: 8257424666127993171}
+  - component: {fileID: 4886547685490706152}
   - component: {fileID: 5497914532283393010}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Desert Mountain Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4886547685490706152
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148136161624143603}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: 6be466e3971850a46b716de4ff530e72, type: 3}
 --- !u!114 &5497914532283393010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,5 +114,6 @@ MonoBehaviour:
   TileID: 0
   TerrainType: 2
   AdditionalInfo: 1
+  IsWalkable: 0
   IsStartTile: 0
-  IsCity: 0
+  HasVillager: 0

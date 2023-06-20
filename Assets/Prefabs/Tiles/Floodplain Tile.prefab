@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7212664477731916789}
   - component: {fileID: 7195032903913222646}
   - component: {fileID: 3633227113294138651}
+  - component: {fileID: -4456455992220803368}
   - component: {fileID: 918478240486074298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floodplain Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-4456455992220803368
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469583392344617659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: 6be466e3971850a46b716de4ff530e72, type: 3}
 --- !u!114 &918478240486074298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,5 +114,6 @@ MonoBehaviour:
   TileID: 0
   TerrainType: 4
   AdditionalInfo: 0
+  IsWalkable: 1
   IsStartTile: 0
-  IsCity: 0
+  HasVillager: 0
