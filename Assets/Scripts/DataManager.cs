@@ -77,10 +77,12 @@ public class DataManager : MonoBehaviour
     public void CreateGame(int FileNum, string NewSaveName)
     {
         DataSlot = FileNum;
-        gameData = new GameData();
+        gameData = new GameData
+        {
+            CurrentLevel = 1
+        };
         SaveNames.HrsPlayed[DataSlot - 1] = 0;
         SaveNames.SaveSlotName[DataSlot - 1] = NewSaveName;
-        gameData.TestNum = DataSlot;
         SaveNameStorage.SaveNames(SaveNames);
         SaveGame(FileNum);
     }

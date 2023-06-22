@@ -1,35 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerControls : MonoBehaviour
 {
     public LayerMask RaycastLayer;
     Camera cam;
     public GameManager manager;
+    public Transform DestinationTile;
+    bool InMovement;
+    public float speed;
+    Vector3 Difference;
     // Start is called before the first frame update
     void Start()
     {
         cam = transform.GetChild(0).GetComponent<Camera>();
+        GameManager.Pause = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (!GameManager.Pause)
         {
-            RaycastHit hit;
-            if(Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 25, RaycastLayer))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.GetComponent<TileInfo>().IsWalkable)
+                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 25, RaycastLayer))
                 {
-                    transform.position = hit.transform.position;
-                    if (CheckTile(hit.transform.GetComponent<TileInfo>()))
+                    if (hit.transform.GetComponent<TileInfo>().IsWalkable)
                     {
-                        manager.VillagerNum -= 1;
-                        manager.CheckVillagers();
+                        InMovement = true;
+                        DestinationTile = hit.transform;
+                        Difference = DestinationTile.position - transform.position;
+                        CheckTile(DestinationTile.GetComponent<TileInfo>());
                     }
                 }
+            }
+            if (Vector2.Distance(new(transform.position.x, transform.position.z), new(DestinationTile.position.x, DestinationTile.position.z)) > 0.1f && InMovement)
+            {
+                transform.Translate(new(0, -Difference.x * speed * Time.deltaTime, Difference.z * speed * Time.deltaTime));
+            }
+            else
+            {
+                transform.position = DestinationTile.position;
+                InMovement = false;
             }
         }
     }
@@ -38,7 +54,8 @@ public class PlayerControls : MonoBehaviour
     {
         if(CurrentTile.HasVillager == true)
         {
-            Destroy(CurrentTile.transform.GetChild(0));
+            manager.GetComponent<DialogueManager>().StartDialogue(CurrentTile.Village);
+            manager.GetComponent<DialogueManager>().IsVillager = true;
             return true;
         }
         else

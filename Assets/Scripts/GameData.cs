@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public int TestNum;
+    public int CurrentLevel;
     //Add variables here to store all the data needed.
-    //(Cant be too conplicated e.g., GameObjects)
+    //(Cant be too complicated e.g., GameObjects)
 }
 
 [System.Serializable]

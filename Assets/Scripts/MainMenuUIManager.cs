@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUIManager : MonoBehaviour
 {
-    public enum SlotState {NONE, CREATE, SAVE, LOAD, DELETE};
+    public enum SlotState {NONE, CREATE, LOAD, DELETE};
     public SlotState CurrentState;
     public DataManager data;
 
@@ -36,11 +36,6 @@ public class MainMenuUIManager : MonoBehaviour
         CurrentState = SlotState.CREATE;
         UpdateUI();
     }
-    public void SaveSlots()
-    {
-        CurrentState = SlotState.SAVE;
-        UpdateUI();
-    }
     public void LoadSlots()
     {
         CurrentState = SlotState.LOAD;
@@ -60,16 +55,9 @@ public class MainMenuUIManager : MonoBehaviour
             case SlotState.CREATE:
                 ChangeMenu(SlotNum);
                 return;
-            case SlotState.SAVE:
-                if(SlotNum > 4)
-                {
-                    data.SaveGame(DataManager.DataSlot);
-                    return;
-                }
-                data.SaveGame(SlotNum);
-                return;
             case SlotState.LOAD:
-                data.LoadGame(SlotNum);
+                SceneManager.LoadScene(1);
+                DataManager.DataSlot = SlotNum;
                 return;
             case SlotState.DELETE:
                 data.DeleteGame(SlotNum);
@@ -123,6 +111,10 @@ public class MainMenuUIManager : MonoBehaviour
     public void CreateGameSave()
     {
         data.CreateGame(SaveCreationNum, GameWorldName);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
